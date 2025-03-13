@@ -1,0 +1,49 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Ubuntu Nerd Font";
+    /* , "Ubuntu"; */
+    font-size: 16px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: white;
+}
+
+#window {
+    font-weight: bold;
+    font-family: "Ubuntu";
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #64727D;
+    border-top: 2px solid transparent;
+    border-radius: 25px;
+}
+
+#workspaces button.active {
+    color: white;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#idle_inhibitor,
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#custom-spotify,
+#tray,
+#mode {
+    padding: 0 5px;
+    margin: 0 2px;
+}
