@@ -1,4 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; EMACS CONFIGURATION ;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -15,6 +15,8 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 (set-face-attribute 'default nil :height 120)
+
+(global-set-key (kbd "C-#") 'comment-region)
 
 ;; Zoom step
 (setq text-scale-mode-step 1.1)
@@ -74,24 +76,6 @@
              "~/.emacs.d/themes/")
 
 (load-theme 'gruber-darkest 1)
-
-;; (use-package doom-themes
-;;   :ensure t
-;;   :config
-;;   ;; Global settings (defaults)
-;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;   (load-theme 'doom-vibrant t)
-
-;;   ;; Enable flashing mode-line on errors
-;;   (doom-themes-visual-bell-config)
-;;   ;; Enable custom neotree theme (nerd-icons must be installed!)
-;;   (doom-themes-neotree-config)
-;;   ;; or for treemacs users
-;;   (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-;;   (doom-themes-treemacs-config)
-;;   ;; Corrects (and improves) org-mode's native fontification.
-;;   (doom-themes-org-config))
 
 ;; MELPA
 (require 'package)
@@ -189,9 +173,11 @@
 (use-package evil
   :ensure t
   :config
-	(setq evil-undo-system 'undo-redo)
+	(setq evil-undo-system 'undo-fu)
   (evil-mode 1))
 
+(setq undo-auto-amalgamate nil)
+(setq evil-want-fine-undo t) 
 (evil-mode 1)
 
 (defun my/setup-evil ()
@@ -205,37 +191,43 @@
 (define-key evil-window-map (kbd "<down>") 'evil-window-down)
 (evil-collection-init)
 
+(use-package evil-multiedit)
+(evil-multiedit-default-keybinds)
 
 ;; multiple cursors
-(use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-S-<mouse-1>" . mc/add-cursor-on-click)
-         ("M-<down>" . mc/mark-next-like-this)  
-         ("M-<up>" . mc/mark-previous-like-this))) 
+;; (use-package multiple-cursors
+;;   :ensure t
+;;   :bind (("C-S-c C-S-c" . mc/edit-lines)
+;;          ("C->" . mc/mark-next-like-this)
+;;          ("C-<" . mc/mark-previous-like-this)
+;;          ("C-S-<mouse-1>" . mc/add-cursor-on-click)
+;;          ("M-<down>" . mc/mark-next-like-this)  
+;;          ("M-<up>" . mc/mark-previous-like-this))
+;; 	:config
+;; 	(with-eval-after-load 'evil
+;;     (define-key evil-normal-state-map (kbd "i") 'mc/insert-into-normal-state)))
 
 ;; Org Mode
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)))
 
-;; Emacs Mode for mini
-(define-derived-mode mini-mode prog-mode "mini"
-  "A simple major mode for mini."
+(use-package web-mode
+  :ensure t
+  :mode
+  (("\\.html?\\'" . web-mode)
+   ("\\.php\\'" . web-mode)))
 
-  ;; Define Keywords for highlighting
-  (setq mini-font-lock-keywords
-	'(("\\<\\(if\\|else\\|match\\|let\\|in\\|int\\)\\>" . font-lock-keyword-face) ;; keywords
-	  ("#\\(.\\)*?#" . font-lock-comment-face) ;; multi-line comments delimited by #
-          ("#.*" . font-lock-comment-face))) ;; single-line comments starting with #
+(use-package glsl-mode
+		:ensure t)
+	
+;; modes for my languages
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
+(require 'klaus-mode)
+(require 'mini-mode)
 
-  ;; Apply the syntax highlighting
-  (setq font-lock-defaults '((mini-font-lock-keywords))))
-
-;; Associate the mode with .mini files
-(add-to-list 'auto-mode-alist '("\\.mi\\'" . mini-mode))
+;; GLSL Mode
+(require 'glsl-mode)
 
 ;; For remote
 (setq tramp-default-method "ssh")
