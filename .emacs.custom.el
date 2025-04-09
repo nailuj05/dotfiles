@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(evil-undo-system 'undo-redo)
  '(package-selected-packages
-	 '(fancy-compilation doom-themes evil-collection fireplace speed-type exec-path-from-shell multiple-cursors dart-mode flycheck direnv tuareg go-mode web-mode lsp-ui lsp-mode counsel-etags which-key dashboard projectile company magit evil rust-mode rainbow-mode))
+	 '(glsl-mode evil-multiedit fancy-compilation doom-themes evil-collection fireplace speed-type exec-path-from-shell multiple-cursors dart-mode flycheck direnv tuareg go-mode web-mode lsp-ui lsp-mode counsel-etags which-key dashboard projectile company magit evil rust-mode rainbow-mode))
  '(safe-local-variable-values '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

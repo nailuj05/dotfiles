@@ -30,13 +30,29 @@
 
 (setq shell-file-name "/usr/bin/zsh")
 
-;; Kill all buffers (for my autism)
-(defun nuke-all-buffers ()
+;; Window Rotations
+(defun rotate-vertical-to-horizontal ()
+  "Switch the current vertical split layout to horizontal split."
   (interactive)
-  (mapcar 'kill-buffer (buffer-list))
-  (delete-other-windows))
+  (let ((buffer1 (window-buffer (next-window)))
+        (buffer2 (window-buffer (selected-window))))
+    (delete-window (next-window))  ; Close the right window in a vertical split
+    (split-window-horizontally)    ; Create a horizontal split
+    (set-window-buffer (selected-window) buffer1)  ; Reuse the buffer in the original window
+    (set-window-buffer (next-window) buffer2)))    ; Reuse the buffer in the new window
 
-(global-set-key (kbd "C-x K") 'nuke-all-buffers)
+(defun rotate-horizontal-to-vertical ()
+  "Switch the current horizontal split layout to vertical split."
+  (interactive)
+  (let ((buffer1 (window-buffer (next-window)))
+        (buffer2 (window-buffer (selected-window))))
+    (delete-window (next-window))  ; Close the bottom window in a horizontal split
+    (split-window-vertically)     ; Create a vertical split
+    (set-window-buffer (selected-window) buffer1)  ; Reuse the buffer in the original window
+    (set-window-buffer (next-window) buffer2)))    ; Reuse the buffer in the new window
+
+(global-set-key (kbd "C-x 4 v") 'rotate-vertical-to-horizontal)
+(global-set-key (kbd "C-x 4 h") 'rotate-horizontal-to-vertical) 
 
 ;; (Fancy) Compile Mode
 (setq compilation-always-kill t)
@@ -81,6 +97,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;; Make sure recent files are on
 (recentf-mode 1)
@@ -119,11 +137,14 @@
 ;; Enable Eglot for programming modes
 (use-package eglot
   :ensure t
+	:config
+	(add-to-list 'eglot-server-programs '((csharp-mode) . ("/opt/omni/OmniSharp" "-lsp")))
   :hook
   ((python-mode . eglot-ensure)
    (rust-mode . eglot-ensure)
    (go-mode . eglot-ensure)
-   (c-mode . eglot-ensure)))
+   (c-mode . eglot-ensure)
+	 (csharp-mode . eglot-ensure)))
 
 (with-eval-after-load 'eglot
   (define-key eglot-mode-map (kbd "C-c C-a") #'eglot-code-actions)
@@ -218,13 +239,10 @@
   (("\\.html?\\'" . web-mode)
    ("\\.php\\'" . web-mode)))
 
-(use-package glsl-mode
-		:ensure t)
-	
 ;; modes for my languages
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
 (require 'klaus-mode)
-(require 'mini-mode)
+;; (require 'mini-mode)
 
 ;; GLSL Mode
 (require 'glsl-mode)
