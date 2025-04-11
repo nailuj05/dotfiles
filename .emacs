@@ -161,6 +161,13 @@
 (setq eglot-extend-to-xref t) ; Use Eglot for cross-references
 (setq eglot-autoshutdown t)  ; Automatically stop server when no more buffers
 
+(use-package company
+  :init
+  (global-company-mode)
+	(setq company-idle-delay nil)
+  :bind
+  ("C-c ." . company-complete))
+
 (require 'flycheck)
 (add-hook 'eglot-managed-mode-hook (lambda () (flymake-mode -1) (flycheck-mode 1)))
 
@@ -246,6 +253,11 @@
 
 ;; GLSL Mode
 (require 'glsl-mode)
+(setq auto-mode-alist
+			(append auto-mode-alist
+							'(("\\.glsl\\'" . glsl-mode)
+								("\\.fs\\'" . glsl-mode)
+								("\\.vs\\'" . glsl-mode))))
 
 ;; For remote
 (setq tramp-default-method "ssh")
