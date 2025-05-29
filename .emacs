@@ -16,7 +16,19 @@
 (show-paren-mode 1)
 (set-face-attribute 'default nil :height 120)
 
+(setq-default indent-tabs-mode nil)
+
+(setq-default tab-width 2)
+(setq-default standard-indent 2)
+
 (global-set-key (kbd "C-#") 'comment-region)
+
+;; Dont show DOS file ending
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq show-trailing-whitespace nil)
+            (setq-local buffer-display-table (make-display-table))
+            (aset buffer-display-table ?\^M [])))
 
 ;; Zoom step
 (setq text-scale-mode-step 1.1)
@@ -217,6 +229,12 @@
 (define-key evil-window-map (kbd "<right>") 'evil-window-right)
 (define-key evil-window-map (kbd "<up>") 'evil-window-up)
 (define-key evil-window-map (kbd "<down>") 'evil-window-down)
+
+(global-set-key (kbd "<up>") nil)
+(global-set-key (kbd "<down>") nil)
+(global-set-key (kbd "<left>") nil)
+(global-set-key (kbd "<right>") nil)
+
 (evil-collection-init)
 
 (use-package evil-multiedit)
@@ -240,11 +258,13 @@
  'org-babel-load-languages
  '((python . t)))
 
-(use-package web-mode
-  :ensure t
-  :mode
-  (("\\.html?\\'" . web-mode)
-   ("\\.php\\'" . web-mode)))
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-enable-auto-closing t)
 
 ;; modes for my languages
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
@@ -264,3 +284,5 @@
 (defun rechnerhalle-ssh ()
   (interactive)
   (dired "/limbu@lxhalle.in.tum.de:/home/limbu/"))
+
+;; Markdown Live Preview using Impatient Mode

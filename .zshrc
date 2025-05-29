@@ -1,6 +1,13 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
@@ -27,7 +34,7 @@ zinit light zsh-users/zsh-autosuggestions
 autoload -U compinit && compinit
 
 eval "$(zoxide init zsh)"
-eval "$(opam env --switch=5.2.0)"
+eval "$(opam env)"
 
 # For Pos1 (Home) and End keys
 bindkey '^[[H' beginning-of-line
@@ -56,11 +63,7 @@ export PATH="$PATH:/home/julian/bin"
 export PATH="$PATH:/home/julian/.local/bin"
 export PATH="$HOME/.opam/5.2.0/bin:$PATH"
 
-# Android / Flutter stuff
-export PATH="$PATH:/home/julian/Work/Private/_flutter_env/flutter/bin"
-export ANDROID_HOME="/home/julian/Work/Private/_flutter_env/android"
-export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator"
-export PATH="$PATH:/home/julian/Work/Private/_flutter_env/android-studio/bin"
+export ANDROID_HOME="/home/julian/work/thirdparty/android_sdk"
 
 whenthe() {
     echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀
@@ -84,12 +87,16 @@ whenthe() {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⢿⣿⣾⣿⡿⠿⠟⠋⠁⠀⠀⠀"
 }
 
+loghours() {
+		python ~/work/private/hour-logger/hour-logger.py
+}
+
 addnoob() {
-		bash ~/Work/Private/noob/src/add_noob.sh
+		bash ~/work/private/noob/src/add_noob.sh
 }
 
 updatenoob() {
-		bash ~/Work/Private/noob/src/update_noob.sh
+		bash ~/work/private/noob/src/update_noob.sh
 }
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -97,3 +104,4 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 export LD_LIBRARY_PATH=/home/julian/osd:$LD_LIBRARY_PATH
+source ~/dlang/dmd-2.111.0/activate
