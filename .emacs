@@ -1,4 +1,4 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; EMACS CONFIGURATION ;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -213,21 +213,14 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; evil setup
-(require 'undo-fu)
+(setq evil-undo-system 'undo-redo)
+(setq undo-auto-amalgamate nil)
+(setq evil-want-fine-undo t)
+
 (use-package evil
   :ensure t
   :config
   (evil-mode 1))
-
-(setq evil-undo-system 'undo-fu)
-(setq undo-auto-amalgamate nil)
-(setq evil-want-fine-undo t) 
-(evil-mode 1)
-
-(defun my/setup-evil ()
-       (evil-mode 1))
-
-(add-hook 'window-startup-hook 'my/setup-evil)
 
 (define-key evil-window-map (kbd "<left>") 'evil-window-left)
 (define-key evil-window-map (kbd "<right>") 'evil-window-right)
@@ -243,19 +236,6 @@
 
 (use-package evil-multiedit)
 (evil-multiedit-default-keybinds)
-
-;; multiple cursors
-;; (use-package multiple-cursors
-;;   :ensure t
-;;   :bind (("C-S-c C-S-c" . mc/edit-lines)
-;;          ("C->" . mc/mark-next-like-this)
-;;          ("C-<" . mc/mark-previous-like-this)
-;;          ("C-S-<mouse-1>" . mc/add-cursor-on-click)
-;;          ("M-<down>" . mc/mark-next-like-this)  
-;;          ("M-<up>" . mc/mark-previous-like-this))
-;; 	:config
-;; 	(with-eval-after-load 'evil
-;;     (define-key evil-normal-state-map (kbd "i") 'mc/insert-into-normal-state)))
 
 ;; Org Mode
 (org-babel-do-load-languages
