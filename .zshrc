@@ -103,5 +103,4 @@ updatenoob() {
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export LD_LIBRARY_PATH=/home/julian/osd:$LD_LIBRARY_PATH
 source ~/dlang/dmd-2.111.0/activate

@@ -78,6 +78,9 @@
 (setq fancy-compilation-quiet-prolog nil)
 (setq fancy-compilation-quiet-prelude nil)
 
+(use-package rainbow-mode)
+(rainbow-mode)
+
 (with-eval-after-load 'compile
   (fancy-compilation-mode))
 
@@ -210,12 +213,13 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; evil setup
+(require 'undo-fu)
 (use-package evil
   :ensure t
   :config
-	(setq evil-undo-system 'undo-fu)
   (evil-mode 1))
 
+(setq evil-undo-system 'undo-fu)
 (setq undo-auto-amalgamate nil)
 (setq evil-want-fine-undo t) 
 (evil-mode 1)
@@ -230,10 +234,10 @@
 (define-key evil-window-map (kbd "<up>") 'evil-window-up)
 (define-key evil-window-map (kbd "<down>") 'evil-window-down)
 
-(global-set-key (kbd "<up>") nil)
-(global-set-key (kbd "<down>") nil)
-(global-set-key (kbd "<left>") nil)
-(global-set-key (kbd "<right>") nil)
+(dolist (key '("<left>" "<right>" "<up>" "<down>"))
+  (define-key evil-normal-state-map (kbd key) nil)
+  (define-key evil-motion-state-map (kbd key) nil)
+  (define-key evil-operator-state-map (kbd key) nil))
 
 (evil-collection-init)
 
