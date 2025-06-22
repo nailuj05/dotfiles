@@ -237,6 +237,8 @@
 (use-package evil-multiedit)
 (evil-multiedit-default-keybinds)
 
+(require 'transpose-frame)
+
 ;; Org Mode
 (org-babel-do-load-languages
  'org-babel-load-languages
