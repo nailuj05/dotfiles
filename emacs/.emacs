@@ -254,7 +254,7 @@
 
 ;; modes for my languages
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
-(require 'klaus-mode)
+;; (require 'klaus-mode)
 ;; (require 'mini-mode)
 
 ;; GLSL Mode

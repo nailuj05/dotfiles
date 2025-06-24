@@ -1,3 +1,6 @@
 [submodule ".emacs.d/themes"]
 	path = .emacs.d/themes
 	url = git@github.com:nailuj05/gruber-darkest-theme.git
+[submodule "emacs/.emacs.d/themes"]
+	path = emacs/.emacs.d/themes
+	url = https://github.com/nailuj05/gruber-darkest-theme.git
