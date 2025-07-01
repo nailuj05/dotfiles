@@ -200,6 +200,9 @@
 ;; mode - packages
 (require 'rust-mode)
 
+(use-package d-mode
+  :ensure t)
+
 (use-package go-mode
   :ensure t
   :hook (before-save . gofmt-before-save)  ;; Format before saving
