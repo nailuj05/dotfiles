@@ -4,7 +4,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-undo-system 'undo-redo)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(company d-mode dashboard evil-collection evil-multiedit
+             exec-path-from-shell fancy-compilation flycheck glsl-mode
+             go-mode magit projectile rainbow-mode rust-mode
+             transpose-frame wc-mode web-mode))
  '(safe-local-variable-values '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
