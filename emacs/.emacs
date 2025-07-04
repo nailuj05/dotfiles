@@ -73,14 +73,14 @@
 
 (add-to-list 'load-path "~/.emacs.d/fancy-compilation")
 (use-package fancy-compilation
-  :commands (fancy-compilation-mode)
-  :config
-  (setq fancy-compilation-override-colors nil
-        fancy-compilation-term "dumb"
-        fancy-compilation-quiet-prolog nil
-        fancy-compilation-quiet-prelude nil)
-  (with-eval-after-load 'compile
-    (fancy-compilation-mode)))
+  :commands (fancy-compilation-mode))
+(setq fancy-compilation-override-colors nil)
+(setq fancy-compilation-term "dumb")
+(setq fancy-compilation-quiet-prolog nil)
+(setq fancy-compilation-quiet-prelude nil)
+
+(with-eval-after-load 'compile
+  (fancy-compilation-mode))
 
 (use-package rainbow-mode
   :config (rainbow-mode))
