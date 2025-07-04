@@ -2,7 +2,15 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "idle_inhibitor", "pulseaudio", "network", "battery", "clock"],
+    "modules-right": [
+      "tray",
+      "idle_inhibitor",
+      "pulseaudio",
+      "network",
+      "battery",
+      "clock",
+      "custom/power"
+    ],
     "margin": 2,
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -31,7 +39,12 @@
     	"interval": 60,
      	"tooltip": true,
       "format": "<b>{:%H:%M}</b>",
-      "tooltip-format": "<b>{:%Y-%m-%d}</b>",
+      "tooltip-format": "<b>{:%d.%m.%Y}</b>",
+    },
+    "custom/power": {
+        "format": "  ",
+        "on-click": "wlogout",
+        "tooltip": false
     },
     "battery": {
         "format": "<b>{capacity}% {icon}</b>",
