@@ -170,6 +170,11 @@
   :hook (before-save . gofmt-before-save)
   :config (setq gofmt-command "goimports"))
 
+(use-package ein
+  :ensure t
+  :config
+  (setq ein:jupyter-default-notebook-directory "~/notebooks/"))
+
 (use-package magit
   :bind ("C-x g" . magit-status))
 
@@ -184,6 +189,10 @@
   (define-key evil-window-map (kbd "<right>") 'evil-window-right)
   (define-key evil-window-map (kbd "<up>") 'evil-window-up)
   (define-key evil-window-map (kbd "<down>") 'evil-window-down)
+  (add-hook 'ein:notebook-mode-hook #'evil-normal-state)
+  (add-hook 'ein:worksheet-mode-hook #'evil-normal-state)
+  (add-hook 'ein:log-mode-hook #'evil-normal-state)
+  (add-hook 'ein:codecell-mode-hook #'evil-normal-state)
   (dolist (key '("<left>" "<right>" "<up>" "<down>"))
     (define-key evil-normal-state-map (kbd key) nil)
     (define-key evil-motion-state-map (kbd key) nil)
