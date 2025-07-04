@@ -28,9 +28,10 @@
       } 
     },
     "clock": {
-        "interval": 60,
-        "format": "<b>{:%H:%M}</b>",
-        "max-length": 25
+    	"interval": 60,
+     	"tooltip": true,
+      "format": "<b>{:%H:%M}</b>",
+      "tooltip-format": "<b>{:%Y-%m-%d}</b>",
     },
     "battery": {
         "format": "<b>{capacity}% {icon}</b>",
