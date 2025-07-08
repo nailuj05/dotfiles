@@ -79,7 +79,8 @@
         }
     },
     "bluetooth": {
-        "format": "  {status}",
+        "format-on": " ",
+        "format-off": "",
         "format-connected": "  {device_alias}",
         "format-connected-battery": "  {device_alias} {device_battery_percentage}% ",
     },
