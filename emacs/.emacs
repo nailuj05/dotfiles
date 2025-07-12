@@ -104,6 +104,10 @@
 (recentf-mode 1)
 (add-hook 'delete-frame-functions #'recentf-save-list)
 (add-hook 'server-after-make-frame-hook #'recentf-load-list)
+(when (daemonp)
+  (add-hook 'delete-frame-functions #'recentf-save-list))
+(add-hook 'kill-emacs-hook #'recentf-save-list)
+(setq recentf-save-file (expand-file-name "recentf" user-emacs-directory))
 
 (setq gdb-many-windows t)
 
