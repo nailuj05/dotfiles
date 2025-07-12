@@ -3,13 +3,14 @@
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
     "modules-right": [
-      "tray",
-      "idle_inhibitor",
-      "pulseaudio",
-      "network",
-      "battery",
-      "clock",
-      "custom/power"
+        "tray",
+        "idle_inhibitor",
+        "bluetooth",
+        "pulseaudio",
+        "network",
+        "battery",
+        "clock",
+        "custom/power"
     ],
     "margin": 2,
     "hyprland/workspaces": {
@@ -17,29 +18,29 @@
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-        "focused": "●",
-        "default": "●"
+            "focused": "●",
+            "default": "●"
         }
-        },
+    },
     "hyprland/window": {
         "max-length": 50
     },
     "tray": {
-	      "icon-size": 21,
-	      "spacing": 10
+        "icon-size": 21,
+        "spacing": 10
     },
     "idle_inhibitor": { 
-      "format": "{icon}", 
-      "format-icons": { 
-        "activated": "\uf06e", 
-        "deactivated": "\uf070" 
-      } 
+        "format": " {icon} ", 
+        "format-icons": { 
+            "activated": "\uf06e", 
+            "deactivated": "\uf070" 
+        } 
     },
     "clock": {
-    	"interval": 60,
-     	"tooltip": true,
-      "format": "<b>{:%H:%M}</b>",
-      "tooltip-format": "<b>{:%d.%m.%Y}</b>",
+        "interval": 60,
+        "tooltip": true,
+        "format": "<b>{:%H:%M}</b>",
+        "tooltip-format": "<b>{:%d.%m.%Y}</b>",
     },
     "custom/power": {
         "format": "  ",
@@ -47,8 +48,8 @@
         "tooltip": false
     },
     "battery": {
-        "format": "<b>{capacity}% {icon}</b>",
-        "format-alt": "<b>{time} {icon}</b>",
+        "format": " <b>{capacity}% {icon}</b>",
+        "format-alt": " <b>{time} {icon}</b>",
         "format-icons": ["󰂎", "󰁻", "󰁾", "󰂀", "󰁹"],
         "format-charging": "<b>{capacity}% 󱐋</b>",
         "interval": 30,
@@ -60,26 +61,31 @@
     },
     "network": {
         "format": "{ifname}",
-	    "format-wifi": "{essid} ({signalStrength}%) <b></b>",
-	    "format-ethernet": "{ifname} <b></b>",
-	    "format-disconnected": "",
-	    "format-disconnected": "<b></b>",
-	    "tooltip-format": "{ifname}",
-	    "tooltip-format-wifi": "{essid} ({signalStrength}%) <b></b>",
-	    "tooltip-format-ethernet": "{ifname} <b></b>",
-	    "tooltip-format-disconnected": "Disconnected",
-	    "max-length": 50
+        "format-wifi": "{essid} ({signalStrength}%) <b></b>",
+        "format-ethernet": "{ifname} <b></b>",
+        "format-disconnected": "",
+        "format-disconnected": "<b></b>",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) <b></b>",
+        "tooltip-format-ethernet": "{ifname} <b></b>",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
     },
     "pulseaudio": {
-        "format": "<b>{icon} {volume}%</b>",
-        "format-bluetooth": "<b>{icon} {volume}%</b>",
-        "format-muted": "<b>󰖁</b>",
+        "format": " <b>{icon} {volume}%</b>",
+        "format-muted": " <b>󰖁</b>",
         "format-icons": {
-        "default": ["󰕿", "󰖀", "󰕾"]
+            "default": ["󰕿", "󰖀", "󰕾"]
         }
-        },
-        "scroll-step": 1,
-        "on-click": "pavucontrol",
-        "ignored-sinks": ["Easy Effects Sink"]
     },
+    "bluetooth": {
+        "format-on": " ",
+        "format-off": "",
+        "format-connected": "  {device_alias}",
+        "format-connected-battery": "  {device_alias} {device_battery_percentage}% ",
+    },
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"]
+},
 }
