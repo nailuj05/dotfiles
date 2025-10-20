@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 (message "Loading .emacs")
 
 (setq custom-file "~/.emacs.custom.el")
@@ -142,11 +143,9 @@
   (define-key eglot-mode-map (kbd "C-c C-a") #'eglot-code-actions)
   (define-key eglot-mode-map (kbd "C-c C-r") #'eglot-rename)
   (define-key eglot-mode-map (kbd "C-c C-f") #'eglot-format-buffer)
-  (define-key eglot-mode-map (kbd "C-c C-h") #'eglot-help-at-point)
   (define-key eglot-mode-map (kbd "C-c C-d") #'flymake-show-buffer-diagnostics)
   (define-key eglot-mode-map (kbd "M-.") #'xref-find-definitions)
   (define-key eglot-mode-map (kbd "M-?") #'xref-find-references)
-  (define-key eglot-mode-map (kbd "M-,") #'xref-pop-marker-stack)
   (define-key eglot-mode-map (kbd "M-n") #'flymake-goto-next-error)
   (define-key eglot-mode-map (kbd "M-p") #'flymake-goto-prev-error))
 
@@ -235,3 +234,19 @@
   (interactive)
   (dired "/limbu@lxhalle.in.tum.de:/home/limbu/"))
 
+(defun rename-current-buffer-file ()
+  "Rename current buffer and file."
+  (interactive)
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Not visiting a file")
+      (let ((new-name (read-file-name "New name: " filename)))
+        (if (get-buffer new-name)
+            (message "Buffer with that name exists")
+          (rename-file filename new-name 1)
+          (rename-buffer (file-name-nondirectory new-name))
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
+
+(global-set-key (kbd "C-c r") 'rename-current-buffer-file)
