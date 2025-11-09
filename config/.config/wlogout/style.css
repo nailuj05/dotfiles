@@ -1,6 +1,7 @@
 * {
     font-family: Roboto, Symbols Nerd Font;
     font-size: 20px;
+    color: white;
     transition-property: background-color;
     transition-duration: 0.7s;
 }
@@ -11,10 +12,10 @@ window {
 }
 
 button {
-    background-color: #11111b;
+    background-color: #202026;
     border-style: solid;
     /* border-width: 2px; */
-    border-radius: 2px;
+    border-radius: 10px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 15%;
@@ -23,11 +24,11 @@ button {
 
 button:active,
 button:hover {
-    background-color: #cdd6f4;
+    background-color: #505050;
 }
 
 button:focus {
-    background-color: #cdd6f4;
+    background-color: #606060;
 }
 
 #lock {

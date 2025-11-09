@@ -18,8 +18,8 @@
         "all-outputs": false,
         "format": "{icon}",
         "format-icons": {
-            "focused": "●",
-            "default": "●"
+            "focused": "<b>⬢</b>",
+            "default": "<b>⬢</b>"
         }
     },
     "hyprland/window": {
@@ -49,7 +49,7 @@
     },
     "battery": {
         "format": " <b>{capacity}% {icon}</b>",
-        "format-alt": " <b>{time} {icon}</b>",
+        "format-alt": " {time} {icon}",
         "format-icons": ["󰂎", "󰁻", "󰁾", "󰂀", "󰁹"],
         "format-charging": "<b>{capacity}% 󱐋</b>",
         "interval": 30,
@@ -72,8 +72,8 @@
         "max-length": 50
     },
     "pulseaudio": {
-        "format": " <b>{icon} {volume}%</b>",
-        "format-muted": " <b>󰖁</b>",
+        "format": " {icon} {volume}%",
+        "format-muted": " 󰖁",
         "format-icons": {
             "default": ["󰕿", "󰖀", "󰕾"]
         }
