@@ -104,9 +104,12 @@ remake() {
     make clean && make
 }
 
+esp32env() { 
+    source ~/work/thirdparty/esp-idf/export.sh;
+}
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 source ~/dlang/dmd-2.111.0/activate
-

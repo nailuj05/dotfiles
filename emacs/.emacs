@@ -102,29 +102,34 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'gruber-darkest t)
 
-(recentf-mode 1)
-(add-hook 'delete-frame-functions #'recentf-save-list)
-(add-hook 'server-after-make-frame-hook #'recentf-load-list)
-(when (daemonp)
-  (add-hook 'delete-frame-functions #'recentf-save-list))
-(add-hook 'kill-emacs-hook #'recentf-save-list)
-(setq recentf-save-file (expand-file-name "recentf" user-emacs-directory))
+(use-package recentf
+  :config
+  (setq recentf-save-file (expand-file-name "recentf" user-emacs-directory)
+        recentf-auto-cleanup 'never
+        recentf-max-saved-items 200
+        recentf-exclude '("/tmp/" "/ssh:"))
+  (recentf-mode 1)
+  (add-hook 'kill-emacs-hook #'recentf-save-list)
+  (add-hook 'after-save-hook #'recentf-save-list)
+  (when (daemonp)
+    (add-hook 'server-after-make-frame-hook #'recentf-load-list)))
 
 (setq gdb-many-windows t)
 
 (use-package dashboard
   :config
-  (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents . 5) (projects . 10))
         dashboard-startup-banner 'logo
         dashboard-set-heading-icons t
-        dashboard-set-file-icons t))
+        dashboard-set-file-icons t)
+  (dashboard-setup-startup-hook)
+  (when (daemonp)
+    (add-hook 'server-after-make-frame-hook
+              (lambda ()
+                (with-current-buffer (get-buffer-create dashboard-buffer-name)
+                  (dashboard-refresh-buffer))))))
 
-(add-hook 'server-after-make-frame-hook #'dashboard-refresh-buffer)
-(add-hook 'window-setup-hook
-          (lambda ()
-            (unless (daemonp)
-              (dashboard-setup-startup-hook))))
+(setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 
 (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 
@@ -160,13 +165,8 @@
 
 (use-package projectile
   :config
-  (projectile-mode 1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-register-project-type 'noob '("noob.c")
-                                    :project-file "noob.c"
-                                    :compile "./noob"
-                                    :test "./noob test"
-                                    :run "./noob run"))
+  (setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-emacs-directory))
+  (projectile-mode 1))
 
 (use-package rust-mode)
 (use-package go-mode
