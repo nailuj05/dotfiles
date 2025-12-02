@@ -89,7 +89,7 @@ whenthe() {
 }
 
 loghours() {
-		python ~/work/private/hour-logger/hour-logger.py
+		python3 ~/work/private/hour-logger/hour-logger.py
 }
 
 addnoob() {
