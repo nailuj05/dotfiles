@@ -104,6 +104,10 @@ remake() {
     make clean && make
 }
 
+ocr() {
+    wl-paste --no-newline --type image/png | tesseract stdin stdout
+}
+
 esp32env() { 
     source ~/work/thirdparty/esp-idf/export.sh;
 }
