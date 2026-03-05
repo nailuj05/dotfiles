@@ -219,7 +219,9 @@
   :mode (("\\.html?\\'" . web-mode)
          ("\\.php\\'" . web-mode)
          ("\\.mustache\\'" . web-mode)
-         ("\\.js\\'" . web-mode))
+         ("\\.svelte\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.ts\\'" . web-mode))
   :config
   (setq web-mode-enable-auto-pairing t
         web-mode-enable-auto-closing t))

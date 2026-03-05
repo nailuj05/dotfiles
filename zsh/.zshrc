@@ -120,3 +120,27 @@ if [[ -e ~/dlang/dmd-2.111.0/activate ]]; then
     source ~/dlang/dmd-2.111.0/activate
 fi
 
+
+# bun completions
+[ -s "/home/julian/.bun/_bun" ] && source "/home/julian/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# SSH Session
+sshstart() {
+  eval "$(ssh-agent -s)" >/dev/null
+  ssh-add -t 300 ~/.ssh/id_ed25519
+}
+
+sshend() {
+  ssh-agent -k >/dev/null
+}
+
+sshstatus() {
+  ssh-add -l
+}
+
+
+eval "$(tirith init)"
