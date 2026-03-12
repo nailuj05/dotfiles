@@ -104,6 +104,10 @@ remake() {
     make clean && make
 }
 
+ocr() {
+    wl-paste --no-newline --type image/png | tesseract stdin stdout
+}
+
 esp32env() { 
     source ~/work/thirdparty/esp-idf/export.sh;
 }
@@ -123,3 +127,20 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# SSH Session
+sshstart() {
+  eval "$(ssh-agent -s)" >/dev/null
+  ssh-add -t 300 ~/.ssh/id_ed25519
+}
+
+sshend() {
+  ssh-agent -k >/dev/null
+}
+
+sshstatus() {
+  ssh-add -l
+}
+
+
+eval "$(tirith init)"

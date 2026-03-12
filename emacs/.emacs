@@ -139,12 +139,14 @@
 (use-package eglot
   :hook ((python-mode . eglot-ensure)
          (rust-mode . eglot-ensure)
-         (go-mode . eglot-ensure)
-         (c-mode . eglot-ensure)
-         (csharp-mode . eglot-ensure))
+         (c-mode . eglot-ensure))
   :config
-  (add-to-list 'eglot-server-programs '((csharp-mode) . ("/opt/omni/OmniSharp" "-lsp")))
-  (setq eglot-extend-to-xref t eglot-autoshutdown t)
+  (setq eglot-extend-to-xref t
+        eglot-autoshutdown t
+        eglot-server-programs
+        '((python-mode . ("ty" "server"))
+          (rust-mode . ("rust-analyzer"))
+          (c-mode . ("clangd"))))
   (define-key eglot-mode-map (kbd "C-c C-a") #'eglot-code-actions)
   (define-key eglot-mode-map (kbd "C-c C-r") #'eglot-rename)
   (define-key eglot-mode-map (kbd "C-c C-f") #'eglot-format-buffer)
@@ -217,7 +219,9 @@
   :mode (("\\.html?\\'" . web-mode)
          ("\\.php\\'" . web-mode)
          ("\\.mustache\\'" . web-mode)
-         ("\\.js\\'" . web-mode))
+         ("\\.svelte\\'" . web-mode)
+         ("\\.js\\'" . web-mode)
+         ("\\.ts\\'" . web-mode))
   :config
   (setq web-mode-enable-auto-pairing t
         web-mode-enable-auto-closing t))
