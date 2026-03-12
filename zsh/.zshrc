@@ -116,3 +116,10 @@ if [[ -e ~/dlang/dmd-2.111.0/activate ]]; then
     source ~/dlang/dmd-2.111.0/activate
 fi
 
+
+# bun completions
+[ -s "/home/julian/.bun/_bun" ] && source "/home/julian/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

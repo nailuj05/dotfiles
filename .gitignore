@@ -1,5 +1,6 @@
 *~
 *#
+*.elc
 emacs/.emacs.d/.lsp-session-v1
 emacs/.emacs.d/auto-save-list/
 emacs/.emacs.d/eln-cache/

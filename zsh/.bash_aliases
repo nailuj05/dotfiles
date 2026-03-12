@@ -14,6 +14,7 @@ alias et='emacsclient -nw -cq'
 alias ets='f() { emacsclient -nw -cq "/sudo::${1}"; }; f'
 alias es='SUDO_EDITOR="emacsclient -t" sudoedit'
 alias bc='bc -ql ~/.bcrc'
-alias gtree='git log --oneline --graph --decorate --all'
+alias gtree='git log --graph --decorate --all --color=always \
+--pretty=format:"%C(auto)%h %C(bold blue)%d %C(reset)%C(green)%an%C(reset) %s"'
 alias qrcode='f() { qrencode -t ANSIUTF8 "${1}"; }; f'
 alias ssh='kitten ssh'
