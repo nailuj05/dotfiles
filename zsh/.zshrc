@@ -142,5 +142,3 @@ sshstatus() {
   ssh-add -l
 }
 
-
-eval "$(tirith init)"

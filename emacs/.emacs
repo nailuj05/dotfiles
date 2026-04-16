@@ -117,8 +117,10 @@
 (setq gdb-many-windows t)
 
 (use-package dashboard
+  :ensure t
   :config
-  (setq dashboard-items '((recents . 5) (projects . 10))
+  (setq dashboard-projects-backend 'project-el)
+  (setq dashboard-items '((recents . 10) (projects . 10))
         dashboard-startup-banner 'logo
         dashboard-set-heading-icons t
         dashboard-set-file-icons t)
@@ -131,8 +133,6 @@
 
 (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
 
-(setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
-
 (use-package which-key
   :config (which-key-mode))
 
@@ -141,8 +141,7 @@
          (rust-mode . eglot-ensure)
          (c-mode . eglot-ensure))
   :config
-  (setq eglot-extend-to-xref t
-        eglot-autoshutdown t
+  (setq eglot-autoshutdown t
         eglot-server-programs
         '((python-mode . ("ty" "server"))
           (rust-mode . ("rust-analyzer"))
@@ -164,11 +163,6 @@
 
 (use-package flycheck
   :hook (eglot-managed-mode . (lambda () (flymake-mode -1) (flycheck-mode 1))))
-
-(use-package projectile
-  :config
-  (setq projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-emacs-directory))
-  (projectile-mode 1))
 
 (use-package rust-mode)
 (use-package go-mode
@@ -254,3 +248,5 @@
           (set-buffer-modified-p nil))))))
 
 (global-set-key (kbd "C-c r") 'rename-current-buffer-file)
+
+(global-set-key (kbd "C-c t") #'transpose-chars)
