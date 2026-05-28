@@ -26,7 +26,7 @@
 (scroll-bar-mode 0)
 (column-number-mode 1)
 (show-paren-mode 1)
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 140)
 (setq-default indent-tabs-mode nil tab-width 2 standard-indent 2)
 
 (use-package transpose-frame :ensure t)
