@@ -6,11 +6,12 @@
  '(ein:output-area-inlined-images t)
  '(evil-undo-system 'undo-redo)
  '(package-selected-packages
-   '(company d-mode dashboard ein evil-collection evil-multiedit
-             exec-path-from-shell fancy-compilation flycheck glsl-mode
-             go-mode json-mode lua-mode magit markdown-mode parrot
-             projectile rainbow-mode rust-mode transpose-frame wc-mode
-             web-mode zig-mode))
+   '(code-cells company d-mode dashboard dockerfile-mode ein
+                evil-collection evil-multiedit exec-path-from-shell
+                fancy-compilation flycheck gdscript-mode glsl-mode
+                go-mode json-mode lua-mode magit markdown-mode parrot
+                projectile rainbow-mode rust-mode transpose-frame
+                wc-mode web-mode zig-mode))
  '(safe-local-variable-values '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

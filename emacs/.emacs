@@ -250,3 +250,7 @@
 (global-set-key (kbd "C-c r") 'rename-current-buffer-file)
 
 (global-set-key (kbd "C-c t") #'transpose-chars)
+
+; Jupyter Note book like 
+(use-package code-cells
+  :hook (python-mode . code-cells-mode-maybe))
